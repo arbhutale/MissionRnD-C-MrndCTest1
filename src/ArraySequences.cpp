@@ -31,7 +31,69 @@ Difficulty : Medium
 #include <stdio.h>
 #include <math.h>
 
-int * find_sequences(int *arr, int len){
-	//Return final array which has 6indexes [AP1_S,AP1_E,AP2_S,AP2_E,GP1_S,GP2_E]
-	return NULL;
+int * find_sequences(int *arr, int len)
+{
+	int i;
+	int *fin;
+	fin = (int*)malloc(sizeof(int) * 6);
+	if (len == 0 || arr == NULL)
+		return NULL;
+	else
+	{
+		for (i = 0; i < len - 2; i++)
+		{
+			if (arr[i + 1] - arr[i] == arr[i + 2] - arr[i + 1])
+			{
+				fin[0] = i;
+				//	printf("%d", i);
+				break;
+			}
+		}
+		for (i = fin[0]; i < len; i++)
+		{
+			if (arr[i + 1] - arr[i] == arr[i + 2] - arr[i + 1])
+				fin[1] = i + 2;
+		}
+		//printf("%d", fin[1]);
+		for (i = fin[1]; i < len; i++)
+		{
+			if (arr[i + 1] - arr[i] == arr[i + 2] - arr[i + 1])
+			{
+				fin[2] = i;
+				break;
+			}
+		}
+		//	printf("%d", fin[2]);
+		for (i = fin[2]; i < len; i++)
+		{
+			if (arr[i + 1] - arr[i] == arr[i + 2] - arr[i + 1])
+				fin[3] = i + 2;
+		}
+		//	printf("%d", fin[3]);
+		for (i = 0; i < len; i++)
+		{
+			if ((arr[i + 1] / arr[i]) == (arr[i + 2] / arr[i + 1]))
+			{
+				if (((arr[i + 1] % arr[i]) == 0) && ((arr[i + 2] % arr[i + 1]) == 0))
+				{
+					fin[4] = i;
+					break;
+				}
+			}
+
+		}
+		for (i = fin[4]; i < len; i++)
+		{
+			if ((arr[i + 1] / arr[i]) == (arr[i + 2] / arr[i + 1]))
+			{
+				if (((arr[i + 1] % arr[i]) == 0) && ((arr[i + 2] % arr[i + 1]) == 0))
+					fin[5] = i + 2;
+			}
+
+		}
+		//printf("%d", fin[4]);
+		//printf("%d", fin[5]);
+		//Return final array which has 6indexes [AP1_S,AP1_E,AP2_S,AP2_E,GP1_S,GP2_E]
+		return fin;
+	}
 }
